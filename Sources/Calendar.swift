@@ -1,8 +1,8 @@
 public struct Calendar {
-    public var subComponents = [IcsElement]()
+    public var subComponents = [CalendarComponent]()
     public var otherAttrs = [String:String]()
 
-    public init(withComponents components: [IcsElement]? = nil) {
+    public init(withComponents components: [CalendarComponent]? = nil) {
         if let components = components {
             self.subComponents = components
         }
@@ -10,7 +10,7 @@ public struct Calendar {
 }
 
 extension Calendar: IcsElement {
-    public mutating func addAttribute(attr: String, _ value: String) {
+    public mutating func addAttribute(_ attr: String, _ value: String) {
         switch attr {
         default:
             otherAttrs[attr] = value

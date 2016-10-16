@@ -1,32 +1,32 @@
 import Foundation
 
-public class iCal {
+open class iCal {
 
-    public static func loadFile(path: String) throws -> [Calendar] {
-        guard let data = NSData(contentsOfFile: path) else { throw iCalError.FileNotFound }
-        guard let string = String(data: data, encoding: NSUTF8StringEncoding) else { throw iCalError.Encoding }
-
-        let icsContent = string.splitNewlines()
-
-        return parse(icsContent)
-    }
-
-    public static func loadString(string: String) -> [Calendar] {
-        let icsContent = string.splitNewlines()
-
-        return parse(icsContent)
-    }
-
-    public static func loadURL(url: NSURL) throws -> [Calendar] {
-        guard let data = NSData(contentsOfURL: url) else { throw iCalError.FileNotFound }
-        guard let string = String(data: data, encoding: NSUTF8StringEncoding) else { throw iCalError.Encoding }
+    open static func loadFile(_ path: String) throws -> [Calendar] {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { throw iCalError.fileNotFound }
+        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw iCalError.encoding }
 
         let icsContent = string.splitNewlines()
 
         return parse(icsContent)
     }
 
-    private static func parse(icsContent: [String]) -> [Calendar] {
+    open static func loadString(_ string: String) -> [Calendar] {
+        let icsContent = string.splitNewlines()
+
+        return parse(icsContent)
+    }
+
+    open static func loadURL(_ url: URL) throws -> [Calendar] {
+        guard let data = try? Data(contentsOf: url) else { throw iCalError.fileNotFound }
+        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw iCalError.encoding }
+
+        let icsContent = string.splitNewlines()
+
+        return parse(icsContent)
+    }
+
+    fileprivate static func parse(_ icsContent: [String]) -> [Calendar] {
         let parser = Parser(icsContent)
         do {
             return try parser.read()
@@ -38,16 +38,16 @@ public class iCal {
 
     // Convenience and Util functions
 
-    public static func dateFromString(string: String) -> NSDate? {
-        return iCal.dateFormatter.dateFromString(string)
+    open static func dateFromString(_ string: String) -> Date? {
+        return iCal.dateFormatter.date(from: string)
     }
 
-    public static func stringFromDate(date: NSDate) -> String {
-        return iCal.dateFormatter.stringFromDate(date)
+    open static func stringFromDate(_ date: Date) -> String {
+        return iCal.dateFormatter.string(from: date)
     }
 
-    static let dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
         return dateFormatter
     }()

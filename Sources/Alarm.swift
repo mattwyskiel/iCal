@@ -1,12 +1,12 @@
 import Foundation
 
 public struct Alarm {
-    public var subComponents = [IcsElement]()
+    public var subComponents = [CalendarComponent]()
     public var otherAttrs = [String:String]()
 }
 
-extension Alarm: IcsElement {
-    public mutating func addAttribute(attr: String, _ value: String) {
+extension Alarm: CalendarComponent {
+    public mutating func addAttribute(_ attr: String, _ value: String) {
         switch attr {
             default:
                 otherAttrs[attr] = value

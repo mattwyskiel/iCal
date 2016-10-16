@@ -1,45 +1,57 @@
 import Foundation
 
 public struct Event {
-    public var subComponents = [IcsElement]()
+    public var subComponents = [CalendarComponent]()
     public var otherAttrs = [String:String]()
 
     // required
-    public var uid: String!
-    public var dtstamp: NSDate!
+    public var uid: String
+    public var dateStamp: Date!
 
     // optional
     // public var organizer: Organizer? = nil
     public var location: String?
     public var summary: String?
-    public var descr: String?
+    public var eventDescription: String?
     // public var class: some enum type?
-    public var dtstart: NSDate?
-    public var dtend: NSDate?
+    public var startDate: Date?
+    public var endDate: Date?
 
-    public init(uid: String? = NSUUID().UUIDString, dtstamp: NSDate? = NSDate()) {
+    public init(uid: String = UUID().uuidString, dateStamp: Date = Date()) {
         self.uid = uid
-        self.dtstamp = dtstamp
+        self.dateStamp = dateStamp
     }
+    
+    public enum Status: String {
+        case confirmed = "CONFIRMED"
+        case tentative = "TENTATIVE"
+        case cancelled = "CANCELLED"
+    }
+    public var status: Status?
+    
 }
 
-extension Event: IcsElement {
-    public mutating func addAttribute(attr: String, _ value: String) {
+extension Event: CalendarComponent {
+    public mutating func addAttribute(_ attr: String, _ value: String) {
         switch attr {
         case "UID":
             uid = value
         case "DTSTAMP":
-            dtstamp = iCal.dateFromString(value)
+            dateStamp = iCal.dateFromString(value)
         case "DTSTART":
-            dtstart = iCal.dateFromString(value)
+            startDate = iCal.dateFromString(value)
         case "DTEND":
-            dtend = iCal.dateFromString(value)
+            endDate = iCal.dateFromString(value)
         // case "ORGANIZER":
         //     organizer
         case "SUMMARY":
             summary = value
         case "DESCRIPTION":
-            descr = value
+            eventDescription = value
+        case "LOCATION":
+            location = value
+        case "STATUS":
+            status = Status(rawValue: value)
         default:
             otherAttrs[attr] = value
         }
@@ -48,11 +60,9 @@ extension Event: IcsElement {
     public func toCal() -> String {
         var str = "BEGIN:VEVENT\n"
 
-        if let uid = uid {
-            str += "UID:\(uid)\n"
-        }
+        str += "UID:\(uid)\n"
 
-        if let dtstamp = dtstamp {
+        if let dtstamp = dateStamp {
             str += "DTSTAMP:\(iCal.stringFromDate(dtstamp))\n"
         }
 
@@ -60,16 +70,24 @@ extension Event: IcsElement {
             str += "SUMMARY:\(summary)\n"
         }
 
-        if let descr = descr {
+        if let descr = eventDescription {
             str += "DESCRIPTION:\(descr)\n"
         }
 
-        if let dtstart = dtstart {
+        if let dtstart = startDate {
             str += "DTSTART:\(iCal.stringFromDate(dtstart))\n"
         }
 
-        if let dtend = dtend {
+        if let dtend = endDate {
             str += "DTEND:\(iCal.stringFromDate(dtend))\n"
+        }
+        
+        if let loc = location {
+            str += "LOCATION:\(loc)"
+        }
+        
+        if let status = status {
+            str += "STATUS: \(status.rawValue)"
         }
 
         for (key, val) in otherAttrs {
@@ -93,6 +111,6 @@ public func ==(lhs: Event, rhs: Event) -> Bool {
 
 extension Event: CustomStringConvertible {
     public var description: String {
-        return "\(iCal.stringFromDate(dtstamp)): \(summary ?? "")"
+        return "\(iCal.stringFromDate(dateStamp)): \(summary ?? "")"
     }
 }
