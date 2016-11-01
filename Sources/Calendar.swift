@@ -9,7 +9,7 @@ public struct Calendar {
     }
 }
 
-extension Calendar: IcsElement {
+extension Calendar: ICSElement {
     public mutating func addAttribute(_ attr: String, _ value: String) {
         switch attr {
         default:

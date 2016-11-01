@@ -1,4 +1,4 @@
-public protocol IcsElement {
+public protocol ICSElement {
     var subComponents: [CalendarComponent] { get set }
     var otherAttrs: [String:String] { get set }
 
@@ -8,7 +8,7 @@ public protocol IcsElement {
     func toCal() -> String
 }
 
-extension IcsElement {
+extension ICSElement {
     public mutating func append(_ component: CalendarComponent?) {
         if let component = component {
             subComponents.append(component)

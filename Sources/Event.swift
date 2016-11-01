@@ -37,11 +37,11 @@ extension Event: CalendarComponent {
         case "UID":
             uid = value
         case "DTSTAMP":
-            dateStamp = iCal.dateFromString(value)
+            dateStamp = ICS.dateFromString(value)
         case "DTSTART":
-            startDate = iCal.dateFromString(value)
+            startDate = ICS.dateFromString(value)
         case "DTEND":
-            endDate = iCal.dateFromString(value)
+            endDate = ICS.dateFromString(value)
         // case "ORGANIZER":
         //     organizer
         case "SUMMARY":
@@ -63,7 +63,7 @@ extension Event: CalendarComponent {
         str += "UID:\(uid)\n"
 
         if let dtstamp = dateStamp {
-            str += "DTSTAMP:\(iCal.stringFromDate(dtstamp))\n"
+            str += "DTSTAMP:\(ICS.stringFromDate(dtstamp))\n"
         }
 
         if let summary = summary {
@@ -75,11 +75,11 @@ extension Event: CalendarComponent {
         }
 
         if let dtstart = startDate {
-            str += "DTSTART:\(iCal.stringFromDate(dtstart))\n"
+            str += "DTSTART:\(ICS.stringFromDate(dtstart))\n"
         }
 
         if let dtend = endDate {
-            str += "DTEND:\(iCal.stringFromDate(dtend))\n"
+            str += "DTEND:\(ICS.stringFromDate(dtend))\n"
         }
         
         if let loc = location {
@@ -111,6 +111,6 @@ public func ==(lhs: Event, rhs: Event) -> Bool {
 
 extension Event: CustomStringConvertible {
     public var description: String {
-        return "\(iCal.stringFromDate(dateStamp)): \(summary ?? "")"
+        return "\(ICS.stringFromDate(dateStamp)): \(summary ?? "")"
     }
 }

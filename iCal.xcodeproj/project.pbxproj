@@ -16,7 +16,6 @@
 		__src_cc_ref_Sources/Util.swift /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Util.swift /* Util.swift */; };
 		__src_cc_ref_Sources/iCal.swift /* iCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/iCal.swift /* iCal.swift */; };
 		__src_cc_ref_Sources/iCalError.swift /* iCalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/iCalError.swift /* iCalError.swift */; };
-		__src_cc_ref_Sources/main.swift /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/main.swift /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +29,6 @@
 		__PBXFileRef_Sources/Util.swift /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/iCal.swift /* iCal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCal.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/iCalError.swift /* iCalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCalError.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/main.swift /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		__PBXFileRef_iCal.xcodeproj/Configs/Project.xcconfig /* iCal.xcodeproj/Configs/Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iCal.xcodeproj/Configs/Project.xcconfig; sourceTree = "<group>"; };
 		"_____Product_iCal" /* iCal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = iCal; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,7 +88,6 @@
 				__PBXFileRef_Sources/iCal.swift /* iCal.swift */,
 				__PBXFileRef_Sources/iCalError.swift /* iCalError.swift */,
 				__PBXFileRef_Sources/IcsElement.swift /* IcsElement.swift */,
-				__PBXFileRef_Sources/main.swift /* main.swift */,
 				__PBXFileRef_Sources/Parser.swift /* Parser.swift */,
 				__PBXFileRef_Sources/Util.swift /* Util.swift */,
 			);
@@ -159,7 +156,6 @@
 				__src_cc_ref_Sources/iCal.swift /* iCal.swift in Sources */,
 				__src_cc_ref_Sources/iCalError.swift /* iCalError.swift in Sources */,
 				__src_cc_ref_Sources/IcsElement.swift /* IcsElement.swift in Sources */,
-				__src_cc_ref_Sources/main.swift /* main.swift in Sources */,
 				__src_cc_ref_Sources/Parser.swift /* Parser.swift in Sources */,
 				__src_cc_ref_Sources/Util.swift /* Util.swift in Sources */,
 			);

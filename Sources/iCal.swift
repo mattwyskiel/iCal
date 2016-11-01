@@ -1,10 +1,10 @@
 import Foundation
 
-open class iCal {
+open class ICS {
 
     open static func loadFile(_ path: String) throws -> [Calendar] {
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { throw iCalError.fileNotFound }
-        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw iCalError.encoding }
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { throw ICSError.fileNotFound }
+        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw ICSError.encoding }
 
         let icsContent = string.splitNewlines()
 
@@ -18,8 +18,8 @@ open class iCal {
     }
 
     open static func loadURL(_ url: URL) throws -> [Calendar] {
-        guard let data = try? Data(contentsOf: url) else { throw iCalError.fileNotFound }
-        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw iCalError.encoding }
+        guard let data = try? Data(contentsOf: url) else { throw ICSError.fileNotFound }
+        guard let string = String(data: data, encoding: String.Encoding.utf8) else { throw ICSError.encoding }
 
         let icsContent = string.splitNewlines()
 
@@ -39,11 +39,11 @@ open class iCal {
     // Convenience and Util functions
 
     open static func dateFromString(_ string: String) -> Date? {
-        return iCal.dateFormatter.date(from: string)
+        return ICS.dateFormatter.date(from: string)
     }
 
     open static func stringFromDate(_ date: Date) -> String {
-        return iCal.dateFormatter.string(from: date)
+        return ICS.dateFormatter.string(from: date)
     }
 
     static let dateFormatter: DateFormatter = {

@@ -1,4 +1,4 @@
-public enum iCalError: Error {
+public enum ICSError: Error {
     case fileNotFound
     case encoding
     case parseError

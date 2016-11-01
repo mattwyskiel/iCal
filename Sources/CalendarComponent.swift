@@ -1,3 +1,3 @@
-public protocol CalendarComponent: IcsElement {
+public protocol CalendarComponent: ICSElement {
     
 }
